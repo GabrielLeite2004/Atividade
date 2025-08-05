@@ -1,7 +1,5 @@
 package com.example.campeonato.service;
 
-import com.example.campeonato.dto.JogadorDTO;
-import com.example.campeonato.mapper.JogadorMapper;
 import com.example.campeonato.model.Jogador;
 import com.example.campeonato.model.Time;
 import com.example.campeonato.repository.JogadorRepository;
