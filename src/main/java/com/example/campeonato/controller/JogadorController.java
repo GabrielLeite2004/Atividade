@@ -10,7 +10,6 @@ import lombok.Data;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-
 @RestController
 @RequestMapping("/jogadores")
 @Data
@@ -25,8 +24,8 @@ public class JogadorController {
 
     @GetMapping
     public Page<JogadorDTO> findAll(Pageable pageable) {
-    return service.findAll(pageable).map(jogador -> mapper.toDTO(jogador));
-}
+        return service.findAll(pageable).map(mapper::toDTO);
+    }
 
     @GetMapping("/{id}")
     public JogadorDTO findById(@PathVariable Integer id) {
@@ -36,13 +35,13 @@ public class JogadorController {
     @PostMapping
     public JogadorDTO create(@RequestBody JogadorDTO dto) {
         Jogador jogador = mapper.toEntity(dto);
-        return mapper.toDTO(service.save(jogador));
+        return mapper.toDTO(service.save(jogador, dto.getTimeId()));
     }
 
     @PutMapping("/{id}")
     public JogadorDTO update(@PathVariable Integer id, @RequestBody JogadorDTO dto) {
         Jogador jogador = mapper.toEntity(dto);
-        return mapper.toDTO(service.update(id, jogador));
+        return mapper.toDTO(service.update(id, jogador, dto.getTimeId()));
     }
 
     @DeleteMapping("/{id}")
